@@ -7,6 +7,10 @@ def inicio(request):
         'form' : UserCreationForm
     })
 
+def home(request):
+    return render(request, 'home.html')
+    
+
 def catalogo(request):
     return render(request, 'catalogo.html')
 

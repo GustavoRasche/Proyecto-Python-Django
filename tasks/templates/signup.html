@@ -1,2 +1,53 @@
 
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/diseno.css' %}" >
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        
+    </head>
+    <body>
+
+      <div class="global-container">
+        <div class="card login-form">
+        <div class="card-body">
+          <h2 class="card-title text-center">Aserradero LM</h2>
+          <div class="card-text">
+            <hr>
+            <!--
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
+            <form>
+              <!-- to error: add class "has-danger" -->
+              <div class="form-group">
+                
+                <label for="exampleInputEmail1" >Correo Electronico</label>
+                <p></p>
+                <input type="email" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+              <div class="form-group">
+                <p></p>
+                <label for="exampleInputPassword1">Contraseña</label>
+                <p></p>
+                <input type="password" class="form-control form-control-sm" id="exampleInputPassword1">
+                <p></p>
+                <a href="#" style="float:right;font-size:12px;">¿Olvidaste tu contraseña?</a>
+              </div>
+              <p>
+                </p>
+                <div class="col"><a href="/home/" class="btn p-2 btn-info w-100"><text class="fs-5" >Iniciar Sesion</text></a></div>
+              <div class="sign-up">
+                ¿No tienes cuenta? <a href="#">Crea una</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      </div>
+
 {{form}}
