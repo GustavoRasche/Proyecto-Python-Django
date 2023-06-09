@@ -14,8 +14,9 @@ def home(request):
 def catalogo(request):
     return render(request, 'catalogo.html')
 
-def ventas(request):
-    return render(request, 'ventas.html')
-
 def historial(request):
     return render(request, 'historial.html')
+
+def dashboard(request):
+    return render(request, 'dashboard.html')
+

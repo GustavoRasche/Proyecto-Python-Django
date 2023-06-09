@@ -25,4 +25,5 @@ urlpatterns = [
     path('catalogo/', views.catalogo),
     path('historial/', views.historial),
     path('home/', views.home),
+    path('dashboard/', views.dashboard),
 ]
