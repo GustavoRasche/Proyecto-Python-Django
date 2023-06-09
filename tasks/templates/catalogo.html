@@ -137,22 +137,22 @@ Historial
     <h1><strong>Categorias</strong></h1>
     <div class="col">
     <select name="categorias" id="cat">
-      <option value="categoria1">Categoria 1</option>
-      <option value="categoria2">Categoria 2</option>
-      <option value="categoria3">Categoria 3</option>
-      <option value="categoria4">Categoria 4</option>
-      <option value="categoria5">Categoria 5</option>
-      <option value="categoria6">Categoria 6</option>
-      <option value="categoria7">Categoria 7</option>
-      <option value="categoria8">Categoria 8</option>
+      <option value="categoria1">Elige una categoria</option>
+      <option value="categoria2">Dimensionado</option>
+      <option value="categoria3">Forro</option>
+      
     </select>
     </div>
-   <div class="col"><input type="submit" value="Buscar" /></div>
-</form>>
+    <div class="col">Largo: <input type="search"/></div>
+    <div class="col">Ancho: <input type="search"/></div>
+    <div class="col"><a href="#" class="btn p-1 btn-warning w-10 mt-5"><text class="fs-5" ><i class="bi bi-search"></i></a></div>
+</form>
 
-<table class="table table-bordered ">
+
+<table class="table table-bordered" >
     <thead class="thead-dark">
       <tr>
+        <th>Categoria</th>
         <th>Producto</th>
         <th>Descripcion</th>
         <th>Cantidad disponible</th>
@@ -161,6 +161,7 @@ Historial
   </thead>
           <tbody>
             <tr>
+              <td>Categoria1</td>
               <td>Producto1</td>
               <td>Descripcion1</td>
               <td>Cantidad1</td>
@@ -168,8 +169,11 @@ Historial
             </tr>
         </tbody>
         </table>
-        <div class="col"><input type="submit" value="Ingresar producto"</div>
-        <input type="submit" value="Eliminar producto" />
+        <div class="row">
+          <div class="col"><a href="#" class="btn p-2 btn-success w-50 mt-5"><text class="fs-5" ><i class="bi bi-send-check"></i></a></div>
+          <div class="col"><a href="#" class="btn p-2 btn-info w-50 mt-5"><text class="fs-5" ><i class="bi bi-pencil"></i></a></div>
+          <div class="col"><a href="#" class="btn p-2 btn-danger w-50 mt-5"><text class="fs-5" ><i class="bi bi-trash"></i></a></div>
+          </div>
     </div>
 
 
