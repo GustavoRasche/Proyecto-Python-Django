@@ -33,10 +33,12 @@ class Pedido(models.Model):
     
 
 class Producto(models.Model):
-    idProducto =  models.BigIntegerField(auto_created=True, primary_key=True,  serialize=False, verbose_name='Codigo Producto')
-    tipo = models.CharField(max_length=45, null=False)
+    id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False)
+    estadoP = models.CharField(max_length=50, null=False)
+    fechaIngreso = models.DateTimeField(auto_now_add=True)
+    completado = models.DurationField(null=True)
     descripcion = models.CharField(max_length=255)
-    valor = models.CharField(max_length=45)
+    precio = models.IntegerField(null=False)
     
     
 
