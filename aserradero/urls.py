@@ -32,7 +32,7 @@ urlpatterns = [
     path('ingresar/pedido', views.ingresarPedido),
     path('home/', views.listadoPedidos),
     path('eliminarPedido/<int:idpedido>',views.eliminarPedido),
-    path('actualizar/pedido/<int:idpedido>', views.actualizarPedido),
+    path('actualizar/pedido/<int:idpedido>', views.actualizarPedido, name='actualizar_pedido'),
     
 
     

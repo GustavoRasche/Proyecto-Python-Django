@@ -118,7 +118,7 @@ def actualizarPedido(request, idpedido):
         form = FormPedido(request.POST, instance=ped)
         if form.is_valid():
             form.save()
-            return redirect('/catalogo')
+            return redirect('/home')
     else:
         form = FormPedido(instance=ped)
 
