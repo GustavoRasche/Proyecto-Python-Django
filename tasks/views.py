@@ -44,5 +44,24 @@ def ingresarProducto(request):
 def listadoProductos(request):
     productos = Producto.objects.all()
     return render(request, 'catalogo.html', {'productos': productos})
-            
+
+def eliminarProducto(request, idproducto):
+    prod = Producto.objects.get(idproducto = idproducto)   
+    prod.delete()
+    return redirect('/catalogo')
+
+def actualizarProducto(request, idproducto):
+     if request.method == 'GET':
+        prod = Producto.objects.get(idproducto = idproducto)
+        form = FormAserradero(instance = prod)
+        return render(request, 'ingresar_producto.html', {'prod': prod, 'form' : form})
+      
+     else:
+         prod = Producto.objects.get(producto = idproducto)
+         form = FormAserradero(request.POST, instance=prod)
+         if form.is_valid():
+            form.save()
+         return redirect('/catalogo')
+         data = {'form' : form}
+         return render(request, 'ingresar_producto.html', data)
 

@@ -27,5 +27,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard),
     path('ingresar/producto', views.ingresarProducto),
     path('catalogo/', views.listadoProductos),
+    path('eliminarProducto/<int:idproducto>', views.eliminarProducto),
+    path('actualizarProducto/<int:idproducto>', views.actualizarProducto),
 
 ]
