@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import FormAserradero
-
+from .models import Producto
 
 # Create your views here.
 def inicio(request):
@@ -40,4 +40,8 @@ def ingresarProducto(request):
                 'form' : FormAserradero,
                 'error' :  'Porfavor envia los datos correctamente'
         })
+
+        def listadoProductos(request):
+             productos = Producto.objects.all()
+             return render(request, '/catalogo', {'productos': productos})
         

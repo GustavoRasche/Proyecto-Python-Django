@@ -158,25 +158,32 @@ Historial
     <div class="col"><a href="#" class="btn p-1 btn-warning w-10 mt-5"><text class="fs-5" >Buscar <i class="bi bi-search"></i></a></div>
 </form>
 
-
+{% if productos %}
 <table class="table table-bordered" >
     <thead class="thead-dark">
       <tr>
-        <th>Categoria</th>
-        <th>Producto</th>
+        <th>ID</th>
+        <th>Dimensionado</th>
         <th>Descripcion</th>
-        <th>Cantidad disponible</th>
-        <th>Valor</th>
+        <th>Precio</th>
+
     </tr>
   </thead>
           <tbody>
+            {% for Producto in productos %}
             <tr>
-              <td>Categoria1</td>
-              <td>Producto1</td>
-              <td>Descripcion1</td>
-              <td>Cantidad1</td>
-              <td>Valor1</td>
+              <td>{{Producto.id}}</td>
+              <td>{{Producto.dimensionado}}</td>
+              <td>{{Producto.descripcion}}</td>
+              <td>{{Producto.precio}}</td>
+
             </tr>
+            {% endfor %}
+            {% else %}
+            <div class="alert alert-primary" role="alert">
+                <strong>No se encuentran productos en el sistema</strong>
+            </div>
+            {% endif %}
         </tbody>
         </table>
         <div class="row">
