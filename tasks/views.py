@@ -41,7 +41,8 @@ def ingresarProducto(request):
                 'error' :  'Porfavor envia los datos correctamente'
         })
 
-        def listadoProductos(request):
-             productos = Producto.objects.all()
-             return render(request, '/catalogo', {'productos': productos})
-        
+def listadoProductos(request):
+    productos = Producto.objects.all()
+    return render(request, 'catalogo.html', {'productos': productos})
+            
+
