@@ -23,12 +23,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.inicio),
     path('historial/', views.historial),
-    path('home/', views.home),
     path('dashboard/', views.dashboard),
     path('ingresar/producto', views.ingresarProducto),
     path('catalogo/', views.listadoProductos),
-    path('ingresar/usuario', views.igresarUsuario),
+    path('ingresar/usuario', views.ingresarUsuario),
     path('eliminarProducto/<int:idproducto>', views.eliminarProducto),
     path('actualizarProducto/<int:idproducto>', views.actualizarProducto),
-
+    path('ingresar/pedido', views.ingresarPedido),
+    path('home/', views.listadoPedidos)
+    
 ]

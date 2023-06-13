@@ -143,6 +143,7 @@ Historial
       <th>Delivery</th>
   </tr>
 </thead>
+
         <tbody>
           {% for pedido in pedidos %}
           
@@ -151,12 +152,15 @@ Historial
             <td>{{pedido.fechaIngreso}}</td>
             <td>{{pedido.descripcion}}</td>
             <td>{{pedido.precio}}</td>
-            <td>{{pedido.cliente}}</td>
-            <td>{{pedido.producto}}</td>
             <td>{{pedido.estadopedido}}</td>
+            <td>{{pedido.reparto}}</td>
+            <td>{{pedido.cliente}}</td>
+            <td>{{pedido.productos}}</td>
             
-            
-          </tr>{% endfor %} <td> <div class="col">
+          </tr>
+          {% endfor %}
+          
+          <td>  <div class="col">
               <a href="" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i>
               </a>
               <a href="" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i>

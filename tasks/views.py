@@ -65,7 +65,7 @@ def actualizarProducto(request, idproducto):
          data = {'form' : form}
          return render(request, 'ingresar_producto.html', data)
 
-def igresarUsuario(request):
+def ingresarUsuario(request):
     if request.method == 'GET':
         return render(request, 'ingresar_usuario.html',{
             'form': FormUsuario
