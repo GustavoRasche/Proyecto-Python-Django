@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from .forms import FormAserradero
-from .models import Producto
+from .forms import *
+from .models import *
 
 # Create your views here.
 def inicio(request):
@@ -46,3 +46,42 @@ def listadoProductos(request):
     return render(request, 'catalogo.html', {'productos': productos})
             
 
+def igresarUsuario(request):
+    if request.method == 'GET':
+        return render(request, 'ingresar_usuario.html',{
+            'form': FormUsuario
+        })
+    else:
+        try:
+            form = FormUsuario(request.POST)
+            if form.is_valid():
+                form.save()
+            return redirect('/ingresar/pedido')
+        
+        except ValueError:
+            return render(request, 'ingresar_usuario.html',{
+                'form': FormUsuario,
+                'error': 'Ingrese datos correctamente'
+            })
+
+def ingresarPedido(request):
+    if request.method == 'GET':
+        return render(request, 'ingresar_pedido.html',{
+            'form': FormPedido
+        })
+    else:
+        try:
+            form = FormPedido(request.POST)
+            if form.is_valid():
+                form.save()
+            return redirect('/home')
+        
+        except ValueError:
+            return render(request, 'ingresar_pedido.html',{
+                'form': FormPedido,
+                'error': 'Ingrese datos correctamente'
+            })
+
+def listadoPedidos(request):
+    pedidos = Pedido.objects.all()
+    return render(request, 'home.html', {'pedidos': pedidos})
