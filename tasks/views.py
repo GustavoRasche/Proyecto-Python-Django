@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from .forms import *
-from .models import *
+from .forms import FormAserradero
+from .models import Producto
 
 # Create your views here.
 def inicio(request):
