@@ -42,8 +42,8 @@ class Producto(models.Model):
         verbose_name = ("Producto")
         verbose_name_plural = ("Productos")
 
-    def __str__(self):
-        return self.tipo
+    def mostrar(self):
+        return Producto
     
     
 class Envio(models.Model):
