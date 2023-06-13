@@ -104,3 +104,4 @@ def ingresarPedido(request):
 def listadoPedidos(request):
     pedidos = Pedido.objects.all()
     return render(request, 'home.html', {'pedidos': pedidos})
+
