@@ -105,3 +105,7 @@ def listadoPedidos(request):
     pedidos = Pedido.objects.all()
     return render(request, 'home.html', {'pedidos': pedidos})
 
+def eliminarPedido(request, idpedido):
+    prod = Pedido.objects.get(idpedido = idpedido)   
+    prod.delete()
+    return redirect('/home')

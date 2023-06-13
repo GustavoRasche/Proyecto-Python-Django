@@ -30,6 +30,7 @@ urlpatterns = [
     path('eliminarProducto/<int:idproducto>', views.eliminarProducto),
     path('actualizarProducto/<int:idproducto>', views.actualizarProducto),
     path('ingresar/pedido', views.ingresarPedido),
-    path('home/', views.listadoPedidos)
+    path('home/', views.listadoPedidos),
+    path('eliminarPedido/<int:idpedido>',views.eliminarPedido),
     
 ]
