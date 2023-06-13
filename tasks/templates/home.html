@@ -141,9 +141,9 @@ Historial
       <th>Fecha ingreso</th>
       <th>Descripcion</th>
       <th>Valor</th>
+      <th>Estado</th>
+      <th>Envio</th>
       <th>Cliente</th>
-      <th>Producto</th>
-      <th>Estado Pedido</th>
       <th>Delivery</th>
       <th>Opciones</th>
   </tr>
@@ -160,7 +160,7 @@ Historial
             <td>{{pedido.precio}}</td>
             <td>{{pedido.estadopedido}}</td>
             <td>{{pedido.reparto}}</td>
-            <td>{{pedido.cliente}}</td>
+            <td>{{pedido.cliente.nombre}}</td>
             <td>{{pedido.productos}}</td>
             <td>  <div class="col">
               <a href="/actualizar/pedido/{{pedido.idpedido}}" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i>
