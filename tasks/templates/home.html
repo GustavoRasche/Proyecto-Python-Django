@@ -18,7 +18,7 @@
         <meta name="theme-color" content="#7952b3">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     </head>
-    <body>
+    <body class="bg-success">
       <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="bootstrap" viewbox="0 0 118 94">
         <title>Ventas</title>
@@ -130,6 +130,10 @@ Historial
 </div>
 <div class="b-example-divider"></div>
 
+
+
+
+<div class="col-9 bg-dark">
 <table class="table table-bordered table-dark">
   <thead class="thead-dark">
     <tr>
@@ -141,8 +145,9 @@ Historial
       <th>Producto</th>
       <th>Estado Pedido</th>
       <th>Delivery</th>
+      <th>Opciones</th>
   </tr>
-</thead>
+  </thead>
 
         <tbody>
           {% for pedido in pedidos %}
@@ -156,28 +161,26 @@ Historial
             <td>{{pedido.reparto}}</td>
             <td>{{pedido.cliente}}</td>
             <td>{{pedido.productos}}</td>
-            
-          </tr>
-          {% endfor %}
-          
-          <td>  <div class="col">
+            <td>  <div class="col">
               <a href="" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i>
               </a>
               <a href="" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i>
               </a>
-              <a href= "/ingresar/usuario" class="btn btn-success btn-sm"><i class="bi bi-plus-square"></i></a>
+            
               </td>
+            
           </tr>
-          
-
-           
-         
-
-      </tbody>
-
-
-
+          {% endfor %}
         
+      </tbody>
+      
+      </table>
+      <center><div ><a href="/ingresar/usuario" class="btn p-2 btn-success w-50 mt-5" ><text class="fs-5" >Ingresar<i class="bi bi-send-check"></i></a></div></center>      
+    </div>
+
+
+    
         
     </body>
+    
 </html>
