@@ -133,7 +133,7 @@ Historial
 <table class="table table-bordered table-dark">
   <thead class="thead-dark">
     <tr>
-      <th>Codigo</th>
+     
       <th>Fecha ingreso</th>
       <th>Descripcion</th>
       <th>Valor</th>
@@ -141,14 +141,16 @@ Historial
       <th>Producto</th>
       <th>Estado Pedido</th>
       <th>Delivery</th>
+      <th>Acciones</th>
   </tr>
 </thead>
+
 
         <tbody>
           {% for pedido in pedidos %}
           
           <tr>
-            <td>{{pedido.idpedido}}</td>
+            
             <td>{{pedido.fechaIngreso}}</td>
             <td>{{pedido.descripcion}}</td>
             <td>{{pedido.precio}}</td>
@@ -157,24 +159,24 @@ Historial
             <td>{{pedido.cliente}}</td>
             <td>{{pedido.productos}}</td>
             
-          </tr>
-          {% endfor %}
+          
+          
           
           <td>  <div class="col">
               <a href="" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i>
               </a>
-              <a href="" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i>
+              <a href="/eliminarPedido/{{pedido.idpedido}}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i>
               </a>
               <a href= "/ingresar/usuario" class="btn btn-success btn-sm"><i class="bi bi-plus-square"></i></a>
-              </td>
-          </tr>
+          </td>
           
-
-           
-         
-
+        </tr>
+        
+       
+          {% endfor %}
+          
       </tbody>
-
+      
 
 
         
