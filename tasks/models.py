@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Usuario(models.Model): 
     
-    idUsuario = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     rutC = models.CharField(max_length=12, null=False)
     nombre = models.CharField(max_length=100, null=False, unique=True )
     apellidoPaterno = models.CharField(max_length=45, null=False)
@@ -16,16 +16,17 @@ class Usuario(models.Model):
     
     
 class Empleado(models.Model):
-    idEmpleado = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='Codigo Empleado')
+    id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='Codigo Empleado')
     correo = models.CharField(max_length=50, null=False)
     contraseña = models.CharField(max_length=8)
 
 class Pedido(models.Model):
-    idPedido = models.BigAutoField(auto_created=True, primary_key=True, serialize=False)
+    id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False)
     estadoP = models.CharField(max_length=50, null=False)
     fechaIngreso = models.DateTimeField(null=False)
     descripcion = models.CharField(max_length=255)
     precio = models.IntegerField(null=False)
+
     
     
     def __str__(self):
@@ -33,13 +34,11 @@ class Pedido(models.Model):
     
 
 class Producto(models.Model):
+   
     id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False)
-    estadoP = models.CharField(max_length=50, null=False)
-    fechaIngreso = models.DateTimeField(auto_now_add=True)
-    completado = models.DurationField(null=True)
+    dimensionado = models.CharField(max_length=45, null=False, default='2x3')
     descripcion = models.CharField(max_length=255)
     precio = models.IntegerField(null=False)
-    
     
 
     class Meta:
@@ -51,7 +50,7 @@ class Producto(models.Model):
     
 
 class Envio(models.Model):
-    idEnvio = models.BigIntegerField(auto_created=True, primary_key=True, serialize=False, verbose_name='Codigo Envio')
+    id = models.BigIntegerField(auto_created=True, primary_key=True, serialize=False, verbose_name='Codigo Envio')
     direccion = models.CharField(max_length=50)
     estado = models.IntegerField()
     
@@ -64,7 +63,7 @@ class Envio(models.Model):
         return self.idEnvio
 
 class Historial(models.Model):
-    idHistorial = models.BigIntegerField(auto_created=True, primary_key=True, serialize=False, verbose_name='Historial Pedidos')
+    id = models.BigIntegerField(auto_created=True, primary_key=True, serialize=False, verbose_name='Historial Pedidos')
     pedido = models.ForeignKey(Pedido, null=True, blank=False, on_delete=models.CASCADE)
 
     class Meta:

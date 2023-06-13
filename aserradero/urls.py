@@ -26,4 +26,5 @@ urlpatterns = [
     path('historial/', views.historial),
     path('home/', views.home),
     path('dashboard/', views.dashboard),
+    path('ingresar/producto', views.ingresarProducto),
 ]

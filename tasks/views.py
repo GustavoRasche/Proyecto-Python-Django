@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from .forms import FormAserradero
+
 
 # Create your views here.
 def inicio(request):
@@ -20,3 +22,22 @@ def historial(request):
 def dashboard(request):
     return render(request, 'dashboard.html')
 
+
+def ingresarProducto(request):
+    if request.method == 'GET':
+        return render(request, 'ingresar_producto.html',{
+            'form': FormAserradero
+        })
+    else:
+        try:
+            form = FormAserradero(request.POST)
+            if form.is_valid():
+                form.save()
+            return redirect('/catalogo')
+    
+        except ValueError:
+            return render(request, 'ingresar_producto.html',{
+                'form' : FormAserradero,
+                'error' :  'Porfavor envia los datos correctamente'
+        })
+        
