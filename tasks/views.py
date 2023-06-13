@@ -50,20 +50,20 @@ def eliminarProducto(request, idproducto):
     prod.delete()
     return redirect('/catalogo')
 
+
 def actualizarProducto(request, idproducto):
-     if request.method == 'GET':
-        prod = Producto.objects.get(idproducto = idproducto)
-        form = FormAserradero(instance = prod)
-        return render(request, 'ingresar_producto.html', {'prod': prod, 'form' : form})
-      
-     else:
-         prod = Producto.objects.get(producto = idproducto)
-         form = FormAserradero(request.POST, instance=prod)
-         if form.is_valid():
+    prod = Producto.objects.get(idproducto=idproducto)
+
+    if request.method == 'POST':
+        form = FormAserradero(request.POST, instance=prod)
+        if form.is_valid():
             form.save()
-         return redirect('/catalogo')
-         data = {'form' : form}
-         return render(request, 'ingresar_producto.html', data)
+            return redirect('/catalogo')
+    else:
+        form = FormAserradero(instance=prod)
+
+    data = {'prod': prod, 'form': form}
+    return render(request, 'actualizar_producto.html', data)
 
 def ingresarUsuario(request):
     if request.method == 'GET':

@@ -28,9 +28,11 @@ urlpatterns = [
     path('catalogo/', views.listadoProductos),
     path('ingresar/usuario', views.ingresarUsuario),
     path('eliminarProducto/<int:idproducto>', views.eliminarProducto),
-    path('actualizarProducto/<int:idproducto>', views.actualizarProducto),
+    path('actualizar/producto/<int:idproducto>', views.actualizarProducto, name='actualizar_producto'),
     path('ingresar/pedido', views.ingresarPedido),
     path('home/', views.listadoPedidos),
     path('eliminarPedido/<int:idpedido>',views.eliminarPedido),
+    
+
     
 ]
