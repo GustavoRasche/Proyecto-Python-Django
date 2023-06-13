@@ -17,5 +17,6 @@ class FormPedido(forms.ModelForm):
         model = Pedido
         fields = '__all__'
         
+        
 
         

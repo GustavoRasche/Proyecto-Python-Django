@@ -109,3 +109,18 @@ def eliminarPedido(request, idpedido):
     prod = Pedido.objects.get(idpedido = idpedido)   
     prod.delete()
     return redirect('/home')
+
+
+def actualizarPedido(request, idpedido):
+    ped = Pedido.objects.get(idpedido=idpedido)
+
+    if request.method == 'POST':
+        form = FormPedido(request.POST, instance=ped)
+        if form.is_valid():
+            form.save()
+            return redirect('/catalogo')
+    else:
+        form = FormPedido(instance=ped)
+
+    data = {'ped': ped, 'form': form}
+    return render(request, 'actualizar_pedido.html', data)
