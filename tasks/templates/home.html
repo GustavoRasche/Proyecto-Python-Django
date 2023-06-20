@@ -144,8 +144,9 @@ Historial
       <th>Estado</th>
       <th>Envio</th>
       <th>Cliente</th>
-      <th>Delivery</th>
-      <th>Opciones</th>
+      <th>Producto</th>
+      <th>Dimension</th>
+      <th>Modificar/Eliminar</th>
   </tr>
   </thead>
 
@@ -160,8 +161,9 @@ Historial
             <td>{{pedido.precio}}</td>
             <td>{{pedido.estadopedido}}</td>
             <td>{{pedido.reparto}}</td>
-            <td>{{pedido.cliente.nombre}}</td>
-            <td>{{pedido.productos}}</td>
+            <td>{{pedido.cliente.nombre}} {{pedido.cliente.apellidoPaterno}}</td>
+            <td>{{pedido.productos.categoria}}</td>
+            <td>{{pedido.productos.dimensionado}}</td>
             <td>  <div class="col">
               <a href="/actualizar/pedido/{{pedido.idpedido}}" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i>
               </a>

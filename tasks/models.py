@@ -20,6 +20,12 @@ categoria_producto = [
     ('Molduras','Molduras')
 ]
 
+cliente = [
+    ('Ingresado', ' Ingresado'),
+]
+
+
+
 class Empleado(models.Model):
     idempleado = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='Codigo Empleado')
     nombreEmpleado = models.CharField(max_length=50, null= False)
