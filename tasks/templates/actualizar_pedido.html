@@ -8,21 +8,31 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="container mt-5"></div>
+        <div class="col-lg-10 mx-auto">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h1 style="text-align: center;">Actualizar pedido</h1>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'actualizar_pedido' ped.idpedido %}" method="POST">
+                        <table style="text-align: center;" class="table table-hover">
+                         {% csrf_token %}
+                         {{form.as_table}}
+                         <p></p>
+                         <tr>
+                             <td colspan="2">
+                                 <center><button class="btn btn-success">Actualizar pedido</button></center>
+                             </td>
+                         </tr>
+                         </table>
+                 
+                     </form>
+                </div>
+            </div>
+        </div>
    
-    <div class="alert alert-info display-1 text-center">Actualizar Pedido</div>
-
-    <form action="{% url 'actualizar_pedido' ped.idpedido %}" method="POST">
-        <table class="table">
-        {% csrf_token %}
-        {{form.as_table}}
-        <p></p>
-        <tr>
-            <td colspan="2">
-                <center><button>Actualizar pedido</button></center>
-            </td>
-        </tr>
-        </table>
-    </form>
+    
             
         
 </body>

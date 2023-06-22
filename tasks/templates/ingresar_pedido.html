@@ -8,15 +8,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>aserradero LM</title>
 </head>
-<body class="container mt-5">
-     <div class="alert alert-info display-1 text-center">Ingresar pedido</div>
-    
-     <form action="/ingresar/pedido" method="POST">
-        {% csrf_token %}
-        {{form}}
-        <p></p>
-        <center><button>Generar Pedido</button></center>
-     </form>
+<body>
+     <div class="container mt-5">
+        <div class="col-lg-10 mx-auto">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h1 style="text-align: center;">Venta de producto</h1>
+                </div>
+                <div class="card-body">
+                    <form action="/ingresar/pedido" method="POST">
+                        <table style="text-align: center;" class="table">
+                            <table style="text-align: center;" class="table">
+                                {% csrf_token %}
+                                {{form.as_table}}
+                                <p></p>
+                                <tr>
+                                    <td colspan="2">
+                                        <center><button class="btn btn-success">Confirmar</button></center>
+                                    </td>
+                                </tr>
+                            </table>
+                </div>
+            </div>
+        </div>
+     </div>
             
         
   

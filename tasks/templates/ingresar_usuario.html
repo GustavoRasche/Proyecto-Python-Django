@@ -8,23 +8,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingresar Usuario</title>
 </head>
-<body class="container mt-5">
-     <div class="alert alert-info display-1 text-center">Ingreso de Cliente</div>
+<body>
+    <div class="container mt-5">
+        <center>
+        <div class="col-lg-10 mx-auto">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h1>Ingrese los datos del cliente</h1>
+                </div>
+                <div class="card-body">
+                    <form action="/ingresar/usuario" method="POST">
+                        <table style="text-align: center;" class="table">
+                            {% csrf_token %}
+                            {{form.as_table}}
+                            <p></p>
+                            <tr>
+                                <td colspan="2">
+                                    <center><button class="btn btn-success">Continuar</button></center>
+                                </td>
+                            </tr>
+                        </table>
+                
+                     </form>
+                </div>
+            </div>
+        </div>
+    </center>
+    </div>
     
-     <form action="/ingresar/usuario" method="POST">
-        <table class="table">
-            {% csrf_token %}
-            {{form.as_table}}
-            <p></p>
-            <tr>
-                <td colspan="2">
-                    <center><button>Continuar</button></center>
-                </td>
-            </tr>
-        </table>
-
-     </form>
-            
         
   
     
