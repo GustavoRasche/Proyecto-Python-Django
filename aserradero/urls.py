@@ -22,7 +22,7 @@ from tasks import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.inicio),
-    path('historial/', views.historial),
+    path('historial/', views.historialPedidos),
     path('dashboard/', views.dashboard),
     path('ingresar/producto', views.ingresarProducto),
     path('catalogo/', views.listadoProductos),

@@ -12,9 +12,17 @@
     <div class="alert alert-info display-1 text-center">Actualizar Producto</div>
 
     <form action="{% url 'actualizar_producto' prod.idproducto %}" method="POST">
-       {% csrf_token %}
-       {{ form }}
-       <button>Actualizar datos</button>
+        <table class="table">
+            {% csrf_token %}
+            {{form.as_table}}
+            <p></p>
+            <tr>
+                <td colspan="2">
+                    <center><button>Actualizar datos</button></center>
+                </td>
+            </tr>
+           
+            </table>
     </form>
             
         

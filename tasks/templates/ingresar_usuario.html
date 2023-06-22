@@ -12,9 +12,17 @@
      <div class="alert alert-info display-1 text-center">Ingreso de Cliente</div>
     
      <form action="/ingresar/usuario" method="POST">
-        {% csrf_token %}
-        {{form}}
-        <button>Continuar</button>
+        <table class="table">
+            {% csrf_token %}
+            {{form.as_table}}
+            <p></p>
+            <tr>
+                <td colspan="2">
+                    <center><button>Continuar</button></center>
+                </td>
+            </tr>
+        </table>
+
      </form>
             
         

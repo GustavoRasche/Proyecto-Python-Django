@@ -105,6 +105,10 @@ def listadoPedidos(request):
     pedidos = Pedido.objects.all()
     return render(request, 'home.html', {'pedidos': pedidos})
 
+def historialPedidos(request):
+    historial = Pedido.objects.all()
+    return render(request, 'historial.html', {'historial': historial})
+
 def eliminarPedido(request, idpedido):
     prod = Pedido.objects.get(idpedido = idpedido)   
     prod.delete()

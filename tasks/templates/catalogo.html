@@ -131,68 +131,112 @@ Historial
 
 
 
-<div class="row"
+<div class="container mt-5">
+  <center><div class="col"><h1><strong>Catalogo</strong></h1></div></center>
+<center>
+    
+    <ul></ul>
 
-<form action="#" style="text-align: center;">
-    <h1><strong>Categorias</strong></h1>
-    <div class="col">
-    <select name="categorias" id="cat">
-      <option value="categoria1">Elige una categoria</option>
-      <option value="categoria2">Dimensionado</option>
-      <option value="categoria3">Forro</option>
-      
-    </select>
-    </div>
-    <div class="col">
-      <select name="categorias" id="cat">
-        <option value="categoria1">Elige una categoria</option>
-        <option value="categoria2">Dimensionado</option>
-        <option value="categoria3">Forro</option>
-        
-      </select>
+
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <div class="card">
+          <div class="card-header bg-dark text-white">
+            <h3>Filtro de busqueda</h3>
+          </div>
+          <div class="card-body">
+            <table class="table-hover">
+              <th><div class="col">
+                <select name="categorias" id="cat">
+                  <option value="categoria1">Elige una categoria</option>
+                  <option value="categoria2">Dimensionado</option>
+                  <option value="categoria3">Traslapo</option>
+                  <option value="categoria4">Forro</option>
+                  <option value="categoria5">Moldura</option>
+                </select>
+              </div></th>
+              
+              <th><div class="col">
+                <select name="categorias" id="cat">
+                  <option value="categoria1">Elige una categoria</option>
+                  <option value="categoria2">Dimensionado</option>
+                  <option value="categoria3">Traslapo</option>
+                  <option value="categoria4">Forro</option>
+                  <option value="categoria5">Moldura</option>
+                  
+                </select>
+                </div>
+              </th>
+
+            
+            </table>
+            <div class="row">
+              <div class="col"><a href="#" class="btn p-1 btn-warning w-10 mt-5"><text class="fs-5" >Buscar <i class="bi bi-search"></i></a></div>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
 
-  <center><div class="col"><a href="#" class="btn p-1 btn-warning w-10 mt-5"><text class="fs-5" >Buscar <i class="bi bi-search"></i></a></div></center> 
-</form>
+    <ul></ul>
+    
 
-{% if productos %}
-<table class="table table-bordered">
-    <thead class="thead-dark">
-      <tr>
-           <th>Codigo producto</th>
-           <th>Categoria</th>
-           <th>Dimensionado</th>
-           <th>Descripcion</th>
-           <th>Precio</th>
+<div class="row">
+  <div class="col-lg-10 mx-auto">
+      <div class="card">
+          <div class="card-header bg-dark  text-white">
+              <h3>Productos en disponibilidad</h3>
+          </div>
+          <div class="card-body ">
+            {% if productos %}
+              <table class="table table-hover table-bordered"  >
+                <thead class="thead-dark">
+                  <tr>
+                       <th>Codigo producto</th>
+                       <th>Categoria</th>
+                       <th>Dimensionado</th>
+                       <th>Descripcion</th>
+                       <th>Precio</th>
+                       <th>Acciones</th>
+            
+                  </tr>
+                </thead>
+                    <tbody>
+            
+                        {% for producto in productos %}
+                          <tr>
+                            <td>{{producto.idproducto}}</td>
+                            <td>{{producto.categoria}}</td>
+                            <td>{{producto.dimensionado}}</td>
+                            <td>{{producto.descripcion}}</td>
+                            <td>{{producto.precio}}</td>
+                            <td><a href="/actualizar/producto/{{producto.idproducto}}" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i><a> / </a><a href="/eliminarProducto/{{producto.idproducto}}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></td>
+                            
+                          </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+            {% else %}
+                    <div class="alert alert-dark" role="alert">
+                        <strong>No se encuentran productos en el sistema</strong>
+                    </div>
+            {% endif %}
+            
+                    <div class="row">
+                      <div class="col"><a href="/ingresar/producto" class="btn p-2 btn-success w-50 mt-5" ><text class="fs-5" >Agregar  <i class="bi bi-plus-square"></i></a></div>
+                    </div>
 
-      </tr>
-    </thead>
-        <tbody>
-
-            {% for producto in productos %}
-              <tr>
-                <td>{{producto.idproducto}}</td>
-                <td>{{producto.categoria}}</td>
-                <td>{{producto.dimensionado}}</td>
-                <td>{{producto.descripcion}}</td>
-                <td>{{producto.precio}}</td>
-                <td><a href="/actualizar/producto/{{producto.idproducto}}" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i></td>
-                  <td><a href="/eliminarProducto/{{producto.idproducto}}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></td>
-              </tr>
-            {% endfor %}
-        </tbody>
-</table>
-{% else %}
-        <div class="alert alert-dark" role="alert">
-            <strong>No se encuentran productos en el sistema</strong>
-        </div>
-{% endif %}
-
-        <div class="row">
-          <div class="col"><a href="/ingresar/producto" class="btn p-2 btn-success w-50 mt-5" ><text class="fs-5" >Agregar  <i class="bi bi-plus-square"></i></a></div>
-        </div>
-
-
-
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+</center>
+</div>
 </body>
+
 </html>
+
+
+
+    

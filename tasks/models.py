@@ -45,7 +45,7 @@ class Usuario(models.Model):
 class Producto(models.Model):
     
     idproducto = models.BigAutoField(auto_created=True, primary_key=True, serialize=False)
-    categoria = models.CharField(null=False, blank=False, choices=categoria_producto,default='Dimensionado')
+    categoria = models.CharField(null=False, blank=False, choices=categoria_producto, default='Dimensionado')
     dimensionado = models.CharField(max_length=45, null=False, default='2x3')
     descripcion = models.CharField(max_length=255)
     precio = models.IntegerField(null=False)

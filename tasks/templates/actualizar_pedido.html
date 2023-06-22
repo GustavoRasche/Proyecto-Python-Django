@@ -12,9 +12,16 @@
     <div class="alert alert-info display-1 text-center">Actualizar Pedido</div>
 
     <form action="{% url 'actualizar_pedido' ped.idpedido %}" method="POST">
-       {% csrf_token %}
-       {{ form }}
-       <button>Actualizar Pedido</button>
+        <table class="table">
+        {% csrf_token %}
+        {{form.as_table}}
+        <p></p>
+        <tr>
+            <td colspan="2">
+                <center><button>Actualizar pedido</button></center>
+            </td>
+        </tr>
+        </table>
     </form>
             
         

@@ -12,9 +12,17 @@
      <div class="alert alert-info display-1 text-center">Ingresar Producto</div>
     
      <form action="/ingresar/producto" method="POST">
+        <table class="table">
         {% csrf_token %}
-        {{form}}
-        <button>Ingresar datos</button>
+        {{form.as_table}}
+        <p></p>
+        <tr>
+            <td colspan="2">
+                <center><button>Ingresar datos</button></center>
+            </td>
+        </tr>
+       
+        </table>
      </form>
             
         

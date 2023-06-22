@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME' : 'AserraderoDB',
         'USER' : 'postgres',
-        'PASSWORD':'Dakskitlol1',
+        'PASSWORD':'123456789',
         'HOST':'localhost',
         'PORT' : '5432',
     }
