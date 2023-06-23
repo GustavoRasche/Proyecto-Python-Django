@@ -80,7 +80,7 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
 
-<span class="fs-4">Aserradero LM</span>
+<span class="fs-4"><img src="{% static "images/LOGO.png" %}"  width="80" height="40"> Aserradero LM</span>
 </a>
 <hr>
 <ul class="nav nav-pills flex-column mb-auto">
@@ -145,7 +145,7 @@ Historial
             <h3>Filtro de busqueda</h3>
           </div>
           <div class="card-body">
-            <table class="table-hover">
+            <table class="table-hover table-sm">
               <th><div class="col">
                 <select name="categorias" id="cat">
                   <option value="categoria1">Elige una categoria</option>
@@ -189,7 +189,7 @@ Historial
           </div>
           <div class="card-body ">
             {% if productos %}
-              <table class="table table-hover table-bordered"  >
+              <table class="table table-hover table-bordered table-responsive"  >
                 <thead class="thead-dark">
                   <tr>
                        <th>Codigo producto</th>

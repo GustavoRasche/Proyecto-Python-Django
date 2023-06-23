@@ -64,7 +64,7 @@ class Pedido(models.Model):
     fechaIngreso = models.DateTimeField(null=False)
     descripcion = models.CharField(max_length=255)
     precio = models.IntegerField(null=False)
-    cliente = models.ForeignKey(Usuario, null=True, blank=False,on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Usuario, null=True, blank=False, on_delete=models.CASCADE)
     productos = models.ForeignKey(Producto, null=True, blank=False, on_delete=models.CASCADE)
     estadopedido = models.CharField(max_length=30, choices=estado_pedido, default='Activo',)
     reparto = models.CharField(max_length=30, choices=delivery, default='Sin Envío')
