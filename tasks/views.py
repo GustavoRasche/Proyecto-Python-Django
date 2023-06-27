@@ -151,3 +151,6 @@ def actualizarPedido(request, idpedido):
 
     data = {'ped': ped, 'form': form}
     return render(request, 'actualizar_pedido.html', data)
+
+
+
