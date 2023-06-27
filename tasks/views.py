@@ -122,6 +122,7 @@ def listadoPedidos(request):
             Q(fechaIngreso__icontains = busqueda)|
             Q(descripcion__icontains = busqueda)|
             Q(precio__icontains = busqueda)|
+            Q(cliente__nombre__icontains = busqueda)|
             Q(cliente__rutC__icontains = busqueda)|
             Q(productos__categoria__icontains = busqueda)|
             Q(estadopedido__icontains = busqueda)|
