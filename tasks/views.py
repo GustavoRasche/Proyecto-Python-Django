@@ -137,7 +137,6 @@ def listadoPedidos(request):
 
 def historialPedidos(request):
     historial = Pedido.objects.all()
-<<<<<<< HEAD
     datos = {}  # Initialize the datos dictionary
     
     if request.method == 'POST':
@@ -162,12 +161,6 @@ def historialPedidos(request):
     
     return render(request, 'historial.html', {'datos': datos})
     
-=======
-    return render(request, 'historial.html', {'historial': historial})
-
-
-
->>>>>>> 879e16c808e0c33062aa04f4f99bedc734c055a7
 def eliminarPedido(request, idpedido):
     prod = Pedido.objects.get(idpedido = idpedido)   
     prod.delete()
@@ -187,11 +180,3 @@ def actualizarPedido(request, idpedido):
 
     data = {'ped': ped, 'form': form}
     return render(request, 'actualizar_pedido.html', data)
-
-
-<<<<<<< HEAD
-        
-    
-=======
-
->>>>>>> 879e16c808e0c33062aa04f4f99bedc734c055a7
