@@ -43,6 +43,8 @@ class Usuario(models.Model):
     apellidoPaterno = models.CharField(max_length=45, null=False, verbose_name='Apellido')
     correo = models.CharField(max_length=255, null=False)
 
+    def __str__(self):
+        return f"{self.nombre} {self.apellidoPaterno}"
     
 class Producto(models.Model):
     

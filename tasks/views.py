@@ -96,22 +96,18 @@ def ingresarUsuario(request):
             })
 
 def ingresarPedido(request):
-    if request.method == 'GET':
-        return render(request, 'ingresar_pedido.html',{
-            'form': FormPedido
-        })
+    if request.method == 'POST':
+        formulario = FormPedido(request.POST)
+        if formulario.is_valid():
+            pedido = formulario.save(commit=False)
+            cliente_id = request.POST['cliente']
+            cliente = Usuario.objects.get(id=cliente_id)
+            pedido.cliente = cliente
+            pedido.save()
+            return redirect('/catalogo')
     else:
-        try:
-            form = FormPedido(request.POST)
-            if form.is_valid():
-                form.save()
-            return redirect('/home')
-        
-        except ValueError:
-            return render(request, 'ingresar_pedido.html',{
-                'form': FormPedido,
-                'error': 'Ingrese datos correctamente'
-            })
+        formulario = FormPedido()
+    return render(request, 'ingresar_pedido.html', {'formulario': formulario})
 
 def listadoPedidos(request):
     busqueda = request.POST.get("buscar")

@@ -19,6 +19,7 @@ class FormPedido(forms.ModelForm):
     precio = forms.IntegerField(label='Precio')
     estadopedido = forms.CharField(label='Estado', widget=forms.Select(choices=estado_pedido))
     reparto = forms.CharField(label='Reparto', widget=forms.Select(choices=delivery))
+    cliente = forms.ModelChoiceField(queryset=Usuario.objects.all(), label='Cliente')
     class Meta:
         model = Pedido
         fields = '__all__'

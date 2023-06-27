@@ -16,17 +16,18 @@
                     <h1 style="text-align: center;">Venta de producto</h1>
                 </div>
                 <div class="card-body">
+                    <table style="text-align: center;" class="table table-hover">
                     <form action="/ingresar/pedido" method="POST">
-                        <table style="text-align: center;" class="table">
-                            <table style="text-align: center;" class="table">
-                                {% csrf_token %}
-                                {{form.as_table}}
-                                <p></p>
-                                <tr>
-                                    <td colspan="2">
-                                        <center><button class="btn btn-success">Confirmar</button></center>
-                                    </td>
-                                </tr>
+                        {% csrf_token %}
+                        {{ formulario.as_table }}
+                        <p></p>
+                        <tr>
+                            <td colspan="2">
+                                <center><button class="btn btn-success">Confirmar</button></center>
+                            </td>
+                        </tr>
+                    </form>
+               
                             </table>
                 </div>
             </div>
