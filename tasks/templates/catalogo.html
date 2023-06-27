@@ -146,33 +146,26 @@ Historial
           </div>
           <div class="card-body">
             <table class="table-hover table-sm">
-              <th><div class="col">
-                <select name="categorias" id="cat">
-                  <option value="categoria1">Elige una categoria</option>
-                  <option value="categoria2">Dimensionado</option>
-                  <option value="categoria3">Traslapo</option>
-                  <option value="categoria4">Forro</option>
-                  <option value="categoria5">Moldura</option>
-                </select>
-              </div></th>
-              
-              <th><div class="col">
-                <select name="categorias" id="cat">
-                  <option value="categoria1">Elige una categoria</option>
-                  <option value="categoria2">Dimensionado</option>
-                  <option value="categoria3">Traslapo</option>
-                  <option value="categoria4">Forro</option>
-                  <option value="categoria5">Moldura</option>
-                  
-                </select>
-                </div>
-              </th>
+              {% block buscador %}
+
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="POST">
+                  {% csrf_token %}
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." name="buscar" value="{{request.POST.buscar}}">
+                    <button class="btn btn-primary" type="submit">
+                      <i class="fas fa-search fa-sm"></i>
+                    </button>
+                  </div>
+                  {% comment %} <div class="row">
+                      <div class="col"><button class="btn p-1 btn-warning w-10 mt-5" type="submit"><text class="fs-5" >Buscar <i class="bi bi-search"></i></div>
+                    </div>
+                </form> {% endcomment %}
+
+              {% endblock buscador %}
 
             
             </table>
-            <div class="row">
-              <div class="col"><a href="#" class="btn p-1 btn-warning w-10 mt-5"><text class="fs-5" >Buscar <i class="bi bi-search"></i></a></div>
-            </div>
+            
           </div>
         </div>
       </div>

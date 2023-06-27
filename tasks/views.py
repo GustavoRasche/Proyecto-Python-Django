@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.db.models import Q
 from .forms import *
 from .models import Producto
+
 
 # Create your views here.
 def inicio(request):
@@ -42,7 +44,17 @@ def ingresarProducto(request):
         })
 
 def listadoProductos(request):
+    busqueda = request.POST.get("buscar")
     productos = Producto.objects.all()
+    
+    if busqueda: 
+        productos = Producto.objects.filter(
+            Q(categoria__icontains = busqueda)|
+            Q(dimensionado__icontains = busqueda )|
+            Q(descripcion__icontains= busqueda)|
+            Q(precio__icontains = busqueda)
+        ).distinct()
+        
     return render(request, 'catalogo.html', {'productos': productos})
 
 def eliminarProducto(request, idproducto):
