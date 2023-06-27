@@ -53,6 +53,9 @@ class Producto(models.Model):
     dimensionado = models.CharField(max_length=45, null=False, default='2x3')
     descripcion = models.CharField(max_length=255)
     precio = models.IntegerField(null=False)
+
+    def __str__(self):
+        return self.categoria
     
     
 class Envio(models.Model):
