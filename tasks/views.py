@@ -96,6 +96,8 @@ def ingresarUsuario(request):
             })
 
 def ingresarPedido(request):
+    ultimo_cliente = Usuario.objects.latest('idusuario')
+    
     if request.method == 'POST':
         formulario = FormPedido(request.POST)
         if formulario.is_valid():
@@ -104,10 +106,11 @@ def ingresarPedido(request):
             cliente = Usuario.objects.get(idusuario=cliente_id)
             pedido.cliente = cliente
             pedido.save()
-            return redirect('/catalogo')
+            return redirect('/home')
     else:
         formulario = FormPedido()
-    return render(request, 'ingresar_pedido.html', {'formulario': formulario})
+
+    return render(request, 'ingresar_pedido.html', {'ultimo_cliente': ultimo_cliente, 'formulario': formulario})
 
 def listadoPedidos(request):
     busqueda = request.POST.get("buscar")
@@ -131,6 +134,8 @@ def listadoPedidos(request):
 def historialPedidos(request):
     historial = Pedido.objects.all()
     return render(request, 'historial.html', {'historial': historial})
+
+
 
 def eliminarPedido(request, idpedido):
     prod = Pedido.objects.get(idpedido = idpedido)   

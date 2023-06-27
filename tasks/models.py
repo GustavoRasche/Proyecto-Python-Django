@@ -67,7 +67,7 @@ class Envio(models.Model):
 
 class Pedido(models.Model):
     idpedido = models.BigAutoField(auto_created=True, primary_key=True, serialize=False)
-    fechaIngreso = models.DateTimeField(default=timezone.now)
+    fechaIngreso = models.DateTimeField(default=timezone.now, verbose_name='Fecha de Ingreso', editable=False)
     descripcion = models.CharField(max_length=255)
     precio = models.IntegerField(null=False)
     cliente = models.ForeignKey(Usuario, null=True, blank=False, on_delete=models.CASCADE)
