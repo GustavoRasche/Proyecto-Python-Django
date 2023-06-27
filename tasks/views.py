@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from django.db.models import Q
 from .forms import *
 from .models import Producto
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 # Create your views here.
@@ -137,28 +137,27 @@ def listadoPedidos(request):
 
 def historialPedidos(request):
     historial = Pedido.objects.all()
-    datos = {}  # Initialize the datos dictionary
+    datos = {'pedidos': historial, 'message': 'Menores a: '}
     
     if request.method == 'POST':
         fecha_desde = request.POST['fecha_desde']
         fecha_hasta = request.POST['fecha_hasta']
         
-        # Convertir las fechas de texto a objetos de fecha y hora
-        fecha_desde = datetime.strptime(fecha_desde, '%Y-%m-%d')
-        fecha_hasta = datetime.strptime(fecha_hasta, '%Y-%m-%d')
+        # Convertir las fechas desde y hasta en objetos datetime
+        fecha_desde = datetime.strptime(fecha_desde, '%Y-%m-%d').date()
+        fecha_hasta = datetime.strptime(fecha_hasta, '%Y-%m-%d').date()
         
-        # Filtrar los pedidos por el rango de fecha
+        # Incrementar la fecha hasta en un día adicional
+        fecha_hasta += timedelta(days=1)
+        
         historial = Pedido.objects.filter(fechaIngreso__range=[fecha_desde, fecha_hasta])
         count = len(historial)
         
-        datos = {
-            'pedidos': historial,
-            'fecha_desde': fecha_desde,
-            'fecha_hasta': fecha_hasta,
-            'count': count,
-            'message': 'Pedidos entre las fechas: '
-        }
-    
+        datos['pedidos'] = historial
+        datos['fecha_desde'] = fecha_desde
+        datos['fecha_hasta'] = fecha_hasta - timedelta(days=1)
+        datos['count'] = count
+        
     return render(request, 'historial.html', {'datos': datos})
     
 def eliminarPedido(request, idpedido):
