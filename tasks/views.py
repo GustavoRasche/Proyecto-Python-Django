@@ -101,7 +101,7 @@ def ingresarPedido(request):
         if formulario.is_valid():
             pedido = formulario.save(commit=False)
             cliente_id = request.POST['cliente']
-            cliente = Usuario.objects.get(id=cliente_id)
+            cliente = Usuario.objects.get(idusuario=cliente_id)
             pedido.cliente = cliente
             pedido.save()
             return redirect('/catalogo')

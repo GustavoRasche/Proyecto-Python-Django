@@ -14,7 +14,7 @@ class FormUsuario(forms.ModelForm)    :
 
 class FormPedido(forms.ModelForm):
     
-    fechaIngreso = forms.DateTimeField(label='Fecha de Ingreso')
+    
     descripcion = forms.CharField(label='Descripcion')
     precio = forms.IntegerField(label='Precio')
     estadopedido = forms.CharField(label='Estado', widget=forms.Select(choices=estado_pedido))

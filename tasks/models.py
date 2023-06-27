@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -66,7 +67,7 @@ class Envio(models.Model):
 
 class Pedido(models.Model):
     idpedido = models.BigAutoField(auto_created=True, primary_key=True, serialize=False)
-    fechaIngreso = models.DateTimeField(null=False)
+    fechaIngreso = models.DateField(default=timezone.now)
     descripcion = models.CharField(max_length=255)
     precio = models.IntegerField(null=False)
     cliente = models.ForeignKey(Usuario, null=True, blank=False, on_delete=models.CASCADE)
