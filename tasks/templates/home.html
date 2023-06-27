@@ -137,7 +137,36 @@ Historial
 
 <div class="container mt-5">
   
-  <h3 style='text-align:right'">Busqueda: <input type="search"> <a href="#" class="btn btn-info"><i class="bi bi-search"></i></a> </h3>
+  <div class="row">
+    <div class="col-lg-10 mx-auto">
+      <div class="card">
+        <div class="card-header bg-dark text-white">
+          <h3>Filtro de busqueda</h3>
+        </div>
+        <div class="card-body">
+          <table class="table-hover table-sm">
+            {% block buscador %}
+
+              <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                  <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." name="buscar" value="{{request.POST.buscar}}">
+                  
+                </div>
+                <div class="row">
+                    <div class="col"><button class="btn p-1 btn-warning w-10 mt-5" type="submit"><text class="fs-5" >Buscar <i class="bi bi-search"></i></div>
+                </div>
+              </form> 
+
+            {% endblock buscador %}
+
+          
+          </table>
+          
+        </div>
+      </div>
+    </div>
+  </div>
   
   <center>
   <div class="row">

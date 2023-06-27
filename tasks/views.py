@@ -114,7 +114,21 @@ def ingresarPedido(request):
             })
 
 def listadoPedidos(request):
+    busqueda = request.POST.get("buscar")
     pedidos = Pedido.objects.all()
+    
+    if busqueda:
+        pedidos = Pedido.objects.filter(
+            Q(fechaIngreso__icontains = busqueda)|
+            Q(descripcion__icontains = busqueda)|
+            Q(precio__icontains = busqueda)|
+            Q(cliente__rutC__icontains = busqueda)|
+            Q(productos__categoria__icontains = busqueda)|
+            Q(estadopedido__icontains = busqueda)|
+            Q(reparto__icontains = busqueda)
+        ).distinct()
+    
+       
     return render(request, 'home.html', {'pedidos': pedidos})
 
 def historialPedidos(request):

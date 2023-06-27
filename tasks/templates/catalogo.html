@@ -152,14 +152,12 @@ Historial
                   {% csrf_token %}
                   <div class="input-group">
                     <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." name="buscar" value="{{request.POST.buscar}}">
-                    <button class="btn btn-primary" type="submit">
-                      <i class="fas fa-search fa-sm"></i>
-                    </button>
+                    
                   </div>
-                  {% comment %} <div class="row">
+                  <div class="row">
                       <div class="col"><button class="btn p-1 btn-warning w-10 mt-5" type="submit"><text class="fs-5" >Buscar <i class="bi bi-search"></i></div>
-                    </div>
-                </form> {% endcomment %}
+                  </div>
+                </form> 
 
               {% endblock buscador %}
 
