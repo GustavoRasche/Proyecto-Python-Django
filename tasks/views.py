@@ -1,8 +1,11 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import TemplateView
 from django.db.models import Q
 from .forms import *
 from .models import Producto
+from datetime import datetime
 
 
 # Create your views here.
@@ -104,7 +107,7 @@ def ingresarPedido(request):
             cliente = Usuario.objects.get(idusuario=cliente_id)
             pedido.cliente = cliente
             pedido.save()
-            return redirect('/catalogo')
+            return redirect('/home')
     else:
         formulario = FormPedido()
     return render(request, 'ingresar_pedido.html', {'formulario': formulario})
@@ -128,10 +131,33 @@ def listadoPedidos(request):
        
     return render(request, 'home.html', {'pedidos': pedidos})
 
+
 def historialPedidos(request):
     historial = Pedido.objects.all()
-    return render(request, 'historial.html', {'historial': historial})
-
+    datos = {}  # Initialize the datos dictionary
+    
+    if request.method == 'POST':
+        fecha_desde = request.POST['fecha_desde']
+        fecha_hasta = request.POST['fecha_hasta']
+        
+        # Convertir las fechas de texto a objetos de fecha y hora
+        fecha_desde = datetime.strptime(fecha_desde, '%Y-%m-%d')
+        fecha_hasta = datetime.strptime(fecha_hasta, '%Y-%m-%d')
+        
+        # Filtrar los pedidos por el rango de fecha
+        historial = Pedido.objects.filter(fechaIngreso__range=[fecha_desde, fecha_hasta])
+        count = len(historial)
+        
+        datos = {
+            'pedidos': historial,
+            'fecha_desde': fecha_desde,
+            'fecha_hasta': fecha_hasta,
+            'count': count,
+            'message': 'Pedidos entre las fechas: '
+        }
+    
+    return render(request, 'historial.html', {'datos': datos})
+    
 def eliminarPedido(request, idpedido):
     prod = Pedido.objects.get(idpedido = idpedido)   
     prod.delete()
@@ -151,3 +177,7 @@ def actualizarPedido(request, idpedido):
 
     data = {'ped': ped, 'form': form}
     return render(request, 'actualizar_pedido.html', data)
+
+
+        
+    
