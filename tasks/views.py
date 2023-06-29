@@ -149,8 +149,14 @@ def listadoPedidos(request):
 
 
 def historialPedidos(request):
+<<<<<<< HEAD
     historial = []
     datos = {'pedidos': historial, 'message': 'Menores a: '}
+=======
+    historial = Pedido.objects.all()
+    total_pedidos = len(historial)
+    datos = {'pedidos': historial, 'total_pedidos': total_pedidos, 'message': 'Menores a: '}
+>>>>>>> 090bcaad794e618f2ef6c6ca2f26b1031f950f53
     
     if request.method == 'POST':
         fecha_desde = request.POST['fecha_desde']
