@@ -1,5 +1,6 @@
 html,body { 
 	height: 100%; 
+	
 }
 
 .global-container{
@@ -39,3 +40,4 @@ form{
 	font-size: 13px;
 	margin-top:20px;
 }
+ 
