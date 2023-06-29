@@ -207,6 +207,8 @@ class PDFExportView(View):
     def get(self, request):
         historial = Pedido.objects.all()  # Obtén todos los registros de la base de datos
 
+        if not historial:
+            return HttpResponse("No hay registros disponibles.")
         # Crea un objeto de documento PDF
         pdf_buffer = BytesIO()
         pdf = SimpleDocTemplate(pdf_buffer, pagesize=letter)
