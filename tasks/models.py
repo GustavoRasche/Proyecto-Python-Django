@@ -80,4 +80,4 @@ class Historial(models.Model):
     pedido = models.ForeignKey(Pedido, null=True, blank=False, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return str(self.pedido.idpedido)

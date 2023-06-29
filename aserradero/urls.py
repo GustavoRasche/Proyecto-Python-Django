@@ -18,6 +18,8 @@ from django import views
 from django.contrib import admin
 from django.urls import path
 from tasks import views
+from tasks.views import PDFExportView
+
 
 
 urlpatterns = [
@@ -34,7 +36,7 @@ urlpatterns = [
     path('home/', views.listadoPedidos),
     path('eliminarPedido/<int:idpedido>',views.eliminarPedido),
     path('actualizar/pedido/<int:idpedido>', views.actualizarPedido, name='actualizar_pedido'),
-    
+    path('exportar-pdf/', PDFExportView.as_view(), name='exportar_pdf'),
 
     
 ]

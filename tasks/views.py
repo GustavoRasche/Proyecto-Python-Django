@@ -4,8 +4,21 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import TemplateView
 from django.db.models import Q
 from .forms import *
-from .models import Producto
+from .models import *
 from datetime import datetime, timedelta
+from django.http import FileResponse
+from django.template.loader import get_template
+from django.views import View
+from reportlab.pdfgen import canvas
+from io import BytesIO
+from django.template.response import TemplateResponse
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.lib import colors
+
+
 
 
 # Create your views here.
@@ -136,7 +149,7 @@ def listadoPedidos(request):
 
 
 def historialPedidos(request):
-    historial = Pedido.objects.all()
+    historial = []
     datos = {'pedidos': historial, 'message': 'Menores a: '}
     
     if request.method == 'POST':
@@ -157,7 +170,8 @@ def historialPedidos(request):
         datos['fecha_desde'] = fecha_desde
         datos['fecha_hasta'] = fecha_hasta - timedelta(days=1)
         datos['count'] = count
-        
+
+        return render(request, 'historial.html', {'datos': datos})
     return render(request, 'historial.html', {'datos': datos})
     
 def eliminarPedido(request, idpedido):
@@ -179,3 +193,115 @@ def actualizarPedido(request, idpedido):
 
     data = {'ped': ped, 'form': form}
     return render(request, 'actualizar_pedido.html', data)
+ 
+
+
+class PDFExportView(View):
+    def get(self, request):
+        historial = Pedido.objects.all()  # Obtén todos los registros de la base de datos
+
+        # Crea un objeto de documento PDF
+        pdf_buffer = BytesIO()
+        pdf = SimpleDocTemplate(pdf_buffer, pagesize=letter)
+
+        # Define el estilo de la tabla
+        estilo_tabla = TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONTSIZE', (0, 0), (-1, 0), 12),
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+            ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black)
+        ])
+
+        # Crea la tabla y agrega los datos
+        tabla_datos = []
+        cabeceras = ['Código', 'Estado', 'Fecha de la venta', 'Descripción', 'Precio', 'Cliente', 'Reparto']
+        tabla_datos.append(cabeceras)
+
+        for pedido in historial:
+            fila = [
+                str(pedido.idpedido),
+                pedido.estadopedido,
+                str(pedido.fechaIngreso),
+                pedido.descripcion,
+                str(pedido.precio),
+                pedido.cliente,
+                pedido.reparto
+            ]
+            tabla_datos.append(fila)
+
+        tabla = Table(tabla_datos)
+        tabla.setStyle(estilo_tabla)
+
+        # Agrega la tabla al contenido del PDF
+        content = [tabla]
+
+        # Genera el PDF
+        pdf.build(content)
+
+        # Configura la respuesta HTTP con el archivo PDF generado
+        pdf_buffer.seek(0)
+        return FileResponse(pdf_buffer, as_attachment=True, filename='historial_ventas.pdf')
+
+    def post(self, request):
+        fecha_desde = request.POST['fecha_desde']
+        fecha_hasta = request.POST['fecha_hasta']
+
+        # Convertir las fechas desde y hasta en objetos datetime
+        fecha_desde = datetime.strptime(fecha_desde, '%Y-%m-%d').date()
+        fecha_hasta = datetime.strptime(fecha_hasta, '%Y-%m-%d').date()
+
+        # Incrementar la fecha hasta en un día adicional
+        fecha_hasta += timedelta(days=1)
+
+        historial = Pedido.objects.filter(fechaIngreso__range=[fecha_desde, fecha_hasta])
+        count = len(historial)
+
+        # Crea un objeto de documento PDF
+        pdf_buffer = BytesIO()
+        pdf = SimpleDocTemplate(pdf_buffer, pagesize=letter)
+
+        # Define el estilo de la tabla
+        estilo_tabla = TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONTSIZE', (0, 0), (-1, 0), 12),
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+            ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black)
+        ])
+
+        # Crea la tabla y agrega los datos
+        tabla_datos = []
+        cabeceras = ['Código', 'Estado', 'Fecha de la venta', 'Descripción', 'Precio', 'Cliente', 'Reparto']
+        tabla_datos.append(cabeceras)
+
+        for pedido in historial:
+            fila = [
+                str(pedido.idpedido),
+                pedido.estadopedido,
+                str(pedido.fechaIngreso),
+                pedido.descripcion,
+                str(pedido.precio),
+                pedido.cliente,
+                pedido.reparto
+            ]
+            tabla_datos.append(fila)
+
+        tabla = Table(tabla_datos)
+        tabla.setStyle(estilo_tabla)
+
+        # Agrega la tabla al contenido del PDF
+        content = [tabla]
+
+        # Genera el PDF
+        pdf.build(content)
+
+        # Configura la respuesta HTTP con el archivo PDF generado
+        pdf_buffer.seek(0)
+        return FileResponse(pdf_buffer, as_attachment=True, filename='historial_ventas.pdf')
