@@ -13,10 +13,11 @@ from reportlab.pdfgen import canvas
 from io import BytesIO
 from django.template.response import TemplateResponse
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
 
 
 
@@ -149,14 +150,14 @@ def listadoPedidos(request):
 
 
 def historialPedidos(request):
-<<<<<<< HEAD
+
     historial = []
     datos = {'pedidos': historial, 'message': 'Menores a: '}
-=======
+
     historial = Pedido.objects.all()
     total_pedidos = len(historial)
     datos = {'pedidos': historial, 'total_pedidos': total_pedidos, 'message': 'Menores a: '}
->>>>>>> 090bcaad794e618f2ef6c6ca2f26b1031f950f53
+
     
     if request.method == 'POST':
         fecha_desde = request.POST['fecha_desde']
@@ -210,6 +211,15 @@ class PDFExportView(View):
         pdf_buffer = BytesIO()
         pdf = SimpleDocTemplate(pdf_buffer, pagesize=letter)
 
+        # Define el estilo del título
+        styles = getSampleStyleSheet()
+        estilo_titulo = styles['Title']
+        estilo_titulo.alignment = 1
+
+        # Agrega el título al contenido del PDF
+        titulo = Paragraph("Historial de ventas Aserradero LM", estilo_titulo)
+        content = [titulo]
+
         # Define el estilo de la tabla
         estilo_tabla = TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
@@ -243,7 +253,7 @@ class PDFExportView(View):
         tabla.setStyle(estilo_tabla)
 
         # Agrega la tabla al contenido del PDF
-        content = [tabla]
+        content.append(tabla)
 
         # Genera el PDF
         pdf.build(content)
@@ -270,6 +280,15 @@ class PDFExportView(View):
         pdf_buffer = BytesIO()
         pdf = SimpleDocTemplate(pdf_buffer, pagesize=letter)
 
+        # Define el estilo del título
+        styles = getSampleStyleSheet()
+        estilo_titulo = styles['Title']
+        estilo_titulo.alignment = 1
+
+        # Agrega el título al contenido del PDF
+        titulo = Paragraph("Historial de ventas Aserradero LM", estilo_titulo)
+        content = [titulo]
+
         # Define el estilo de la tabla
         estilo_tabla = TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
@@ -303,7 +322,7 @@ class PDFExportView(View):
         tabla.setStyle(estilo_tabla)
 
         # Agrega la tabla al contenido del PDF
-        content = [tabla]
+        content.append(tabla)
 
         # Genera el PDF
         pdf.build(content)
