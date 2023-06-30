@@ -23,6 +23,7 @@
 
           
           </script>
+          
     </head>
     <body class="bg-dark">
       <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -157,7 +158,9 @@ Historial
                     <input type="date" class="form-control" id="fecha_hasta" name="fecha_hasta" value="{{ datos.fecha_hasta|date:'Y-m-d' }}" required>
                   </div>
                 </div>
+                <p></p>
                 <button type="submit" class="btn btn-primary">Buscar</button>
+                <p></p>
               </form>
 
               {% if datos.pedidos %}

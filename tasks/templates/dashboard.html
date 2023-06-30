@@ -28,6 +28,7 @@
           }
       
           </script>
+
     </head>
     <body class="bg-dark">
       <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -141,80 +142,72 @@ Historial
 <div class="b-example-divider"></div>
 
 {% block content %}
-  <div class="container-fluid" style="background-image: url('{% static 'images/logoblanco.png' %}'); background-repeat: no-repeat; background-size: cover;">
-    <div class= "row">
-      <div class= "col-lg-12">
-        <div id="container"></div>
-      </div>
+<div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh; background-image: url('{% static 'images/logoblanco.png' %}'); background-repeat: no-repeat; background-size: cover;">
+  <div class="row">
+    <div class="col-lg-12">
+      <div id="container"></div>
     </div>
   </div>
+</div>
 
-  <script>
-    Highcharts.chart('container', {
-      chart: {
-          type: 'column'
-      },
+<script>
+  Highcharts.chart('container', {
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Ventas durante el año 2023'
+    },
+    subtitle: {
+      text: 'Source: Maderas LM'
+    },
+    xAxis: {
+      categories: [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre'
+      ],
+      crosshair: true
+    },
+    yAxis: {
+      min: 0,
       title: {
-          text: 'ventas durante el año 2023'
-      },
-      subtitle: {
-          text: 'Source: Maderas LM'
-      },
-      xAxis: {
-          categories: [
-              'enero',
-              'Febreo',
-              'Marzo',
-              'Abril',
-              'Mayo',
-              'Junio',
-              'Julio',
-              'Agosto',
-              'Septiembre',
-              'Octubre',
-              'Noviembre',
-              'Deciembre'
-          ],
-          crosshair: true
-      },
-      yAxis: {
-          min: 0,
-          title: {
-              text: 'valores $'
-          }
-      },
-      tooltip: {
-          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-              '<td style="padding:0"><b>{point.y:.1f} $</b></td></tr>',
-          footerFormat: '</table>',
-          shared: true,
-          useHTML: true
-      },
-      plotOptions: {
-          column: {
-              pointPadding: 0.2,
-              borderWidth: 0
-          }
-      },
-      series: [{
-          name: 'Porcentaje de Ventas',
-          showInLegend: false,
-          colorByPoint: true,
-          data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
-              194.1, 95.6, 54.4]
-  
-  
-      }]
+        text: 'Valores ($)'
+      }
+    },
+    tooltip: {
+      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+        '<td style="padding:0"><b>{point.y:.1f} $</b></td></tr>',
+      footerFormat: '</table>',
+      shared: true,
+      useHTML: true
+    },
+    plotOptions: {
+      column: {
+        pointPadding: 0.2,
+        borderWidth: 0
+      }
+    },
+    series: [{
+      name: 'Porcentaje de Ventas',
+      showInLegend: false,
+      colorByPoint: true,
+      data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
+        194.1, 95.6, 54.4]
+    }]
   });
-  
-  </script>
+</script>
 {% endblock %}
 
-
-
-
-        
-        
-    </body>
+</body>
 </html>
