@@ -16,7 +16,7 @@
     <meta name="theme-color" content="#7952b3">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
-<body >
+<body class="bg-dark" >
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="bootstrap" viewbox="0 0 118 94">
     <title>Bootstrap</title>
@@ -131,7 +131,7 @@ Historial
 
 
 
-<div class="container mt-5">
+<div class="container mt-5" style="background-image: url('{% static 'images/logoblanco.png' %}'); background-repeat: no-repeat; background-size: cover;">
 
 <center>
     
@@ -172,62 +172,70 @@ Historial
     <ul></ul>
     
 
-<div class="row">
-  <div class="col-lg-10 mx-auto">
-      <div class="card">
-          <div class="card-header bg-dark  text-white">
-              <h3>Productos en disponibilidad</h3>
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <div class="card">
+          <div class="card-header bg-dark text-white">
+            <h3>Productos en disponibilidad</h3>
           </div>
-          <div class="card-body ">
+          <div class="card-body">
             {% if productos %}
-              <table class="table table-hover table-bordered table-responsive"  >
+            <div class="table-responsive" style="height: 100x; overflow-y: scroll;">
+              <table class="table table-hover table-bordered">
                 <thead class="thead-dark">
                   <tr>
-                       <th>Codigo producto</th>
-                       <th>Categoria</th>
-                       <th>Dimension</th>
-                       <th>Descripcion</th>
-                       <th>Precio</th>
-                       <th>Acciones</th>
-            
+                    <th>Codigo producto</th>
+                    <th>Categoria</th>
+                    <th>Dimension</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
                   </tr>
                 </thead>
-                    <tbody>
-            
-                        {% for producto in productos %}
-                          <tr>
-                            <td>{{producto.idproducto}}</td>
-                            <td>{{producto.categoria}}</td>
-                            <td>{{producto.dimensionado}}</td>
-                            <td>{{producto.descripcion}}</td>
-                            <td>{{producto.precio}}</td>
-                            <td><a href="/actualizar/producto/{{producto.idproducto}}" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i><a> / </a><a href="/eliminarProducto/{{producto.idproducto}}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></td>
-                            
-                          </tr>
-                        {% endfor %}
-                    </tbody>
-            </table>
-            {% else %}
-                    <div class="alert alert-dark" role="alert">
-                        <strong>No se encuentran productos en el sistema</strong>
-                    </div>
-            {% endif %}
-            
-                    <div class="row">
-                      <div class="col"><a href="/ingresar/producto" class="btn p-2 btn-success w-50 mt-5" ><text class="fs-5" >Agregar  <i class="bi bi-plus-square"></i></a></div>
-                    </div>
-
+                <tbody>
+                  {% for producto in productos %}
+                  <tr>
+                    <td>{{producto.idproducto}}</td>
+                    <td>{{producto.categoria}}</td>
+                    <td>{{producto.dimensionado}}</td>
+                    <td>{{producto.descripcion}}</td>
+                    <td>{{producto.precio}}</td>
+                    <td>
+                      <a href="/actualizar/producto/{{producto.idproducto}}" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i></a>
+                      <a href="/eliminarProducto/{{producto.idproducto}}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                
               </table>
-          </div>
+            </div>
+            {% else %}
+            <div class="alert alert-dark" role="alert">
+              <strong>No se encuentran productos en el sistema</strong>
+            </div>
+            {% endif %}
+            <div class="card-footer">
+              <div class="row justify-content-center">
+                <a href="/ingresar/producto" class="btn p-2 btn-success w-50" style="text-align: center;">
+                  <text class="fs-5">Agregar  <i class="bi bi-plus-square"></i></text>
+                </a>
+              </div>
+            </div>
+          
+        </div>
+
+
+        </div>
+
       </div>
-  </div>
-</div>
+    </div>
+    
+    
 </center>
 </div>
 </body>
 
 </html>
-
-
 
     

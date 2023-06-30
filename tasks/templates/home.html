@@ -170,66 +170,64 @@ Historial
   
   <center>
     <p></p>
-  <div class="row">
-    <div class="col-lg-10 mx-auto">
-      <div class="card" >
-        <div class="card-header bg-dark text-white">
-          <h1>Ventas</h1>
-        </div>
-        <div class="card-body">
-          <table class="table table-bordered table-hover">
-            <thead class="thead-dark">
-              <tr>
-               
-                <th>Fecha</th>
-                <th>Descripcion</th>
-                <th>Valor</th>
-                <th>Estado</th>
-                <th>Envio</th>
-                <th>Cliente</th>
-                <th>Producto</th>
-                <th>Dimension</th>
-                <th>Modificar/Eliminar</th>
-            </tr>
-            </thead>
-          
-          
-                  <tbody>
-                    {% for pedido in pedidos %}
-                    
-                    <tr>
-                      
-                      <td>{{pedido.fechaIngreso}}</td>
-                      <td>{{pedido.descripcion}}</td>
-                      <td>{{pedido.precio}}</td>
-                      <td>{{pedido.estadopedido}}</td>
-                      <td>{{pedido.reparto}}</td>
-                      <td>{{pedido.cliente.nombre}} {{pedido.cliente.apellidoPaterno}}</td>
-                      <td>{{pedido.productos.categoria}}</td>
-                      <td>{{pedido.productos.dimensionado}}</td>
-                      <td>  <div class="col">
-                        <a href="/actualizar/pedido/{{pedido.idpedido}}" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i>
-                        </a>
-                        <a href="/eliminarPedido/{{pedido.idpedido}}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i>
-                        </a>
-                      
-                        </td>
-                      
-                    </tr>
-                    {% endfor %}
-                  
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <div class="card">
+          <div class="card-header bg-dark text-white">
+            <h1>Ventas</h1>
+          </div>
+          <div class="card-body" style="overflow-x: auto;">
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Descripcion</th>
+                    <th>Valor</th>
+                    <th>Estado</th>
+                    <th>Envio</th>
+                    <th>Cliente</th>
+                    <th>Producto</th>
+                    <th>Dimension</th>
+                    <th>Modificar/Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for pedido in pedidos %}
+                  <tr>
+                    <td>{{pedido.fechaIngreso}}</td>
+                    <td>{{pedido.descripcion}}</td>
+                    <td>{{pedido.precio}}</td>
+                    <td>{{pedido.estadopedido}}</td>
+                    <td>{{pedido.reparto}}</td>
+                    <td>{{pedido.cliente.nombre}} {{pedido.cliente.apellidoPaterno}}</td>
+                    <td>{{pedido.productos.categoria}}</td>
+                    <td>{{pedido.productos.dimensionado}}</td>
+                    <td>
+                      <div class="col">
+                        <a href="/actualizar/pedido/{{pedido.idpedido}}" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i></a>
+                        <a href="/eliminarPedido/{{pedido.idpedido}}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
                 </tbody>
-                
-                </table>
-                <center><div ><a href="/ingresar/usuario" class="btn p-2 btn-success w-50 mt-5" ><text class="fs-5" >Agregar  <i class="bi bi-plus-square"></i></a></div></center>      
+              </table>
+            </div>
+          </div>
+          <center>
+            <div class="card-footer">
+              <div class="row justify-content-center">
+                <a href="/ingresar/usuario" class="btn p-2 btn-success" style="width: 200px;">
+                  <span class="fs-5">Agregar <i class="bi bi-plus-square"></i></span>
+                </a>
+              </div>
+            </div>
+          </center>
         </div>
       </div>
     </div>
-  </div>
-</center>
-</div>
-
-
+    
 
 
    

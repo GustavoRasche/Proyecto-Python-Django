@@ -22,7 +22,7 @@
         <script src="{% static '//code.highcharts.com/modules/accessibility.js'%}"></script>
       	<script src="{% static 'highcharts/highcharts.js' %}"></script>
 
-    <body>
+    <body class="bg-dark">
       <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="bootstrap" viewbox="0 0 118 94">
         <title>Bootstrap</title>
@@ -135,7 +135,7 @@ Historial
 <div class="b-example-divider"></div>
 
 {% block content %}
-  <div class="container-fluid">
+  <div class="container-fluid" style="background-image: url('{% static 'images/logoblanco.png' %}'); background-repeat: no-repeat; background-size: cover;">
     <div class= "row">
       <div class= "col-lg-12">
         <div id="container"></div>
