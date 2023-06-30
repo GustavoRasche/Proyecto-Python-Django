@@ -7,14 +7,39 @@
     <title>Aserradero LM</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link href={% static 'css/sidebar.css'%} rel="stylesheet">
-    <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="manifest" href="/docs/5.1/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-    <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
-    <meta name="theme-color" content="#7952b3">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+    function confirmLogout() {
+        var confirmLogout = confirm("¿Estás seguro de que deseas cerrar sesión?");
+        if (confirmLogout) {
+
+            window.location.href = "{% url 'login' %}";
+        }
+    }
+
+    function confirmDelete(idproducto) {
+    var confirmDelete = confirm("¿Estás seguro de que deseas eliminar este producto?");
+    if (confirmDelete) {
+
+      $.ajax({
+        url: '/eliminarProducto/' + idproducto,
+        type: 'GET',
+        success: function (response) {
+
+          window.location.href = '/catalogo';
+        },
+        error: function (xhr, status, error) {
+
+        }
+      });
+    }
+  }
+
+    </script>
 </head>
 <body class="bg-dark" >
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -78,7 +103,7 @@
   <main>
     <h1 class="visually-hidden">Ejemplos de Sidebars</h1>
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
-<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+<a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
 
 <span class="fs-4"><img src="{% static "images/logoblanco.png" %}"  width="80" height="40"> Aserradero LM</span>
 </a>
@@ -118,11 +143,10 @@ Historial
 <strong>Sesion</strong>
 </a>
 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-<li><a class="dropdown-item" href="#">Nuevo proyecto...</a></li>
-<li><a class="dropdown-item" href="#">Configuración</a></li>
-<li><a class="dropdown-item" href="#">Perfil</a></li>
+
+<li><a class="dropdown-item" href="#">Soporte</a></li>
 <li><hr class="dropdown-divider"></li>
-<li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+<li><a class="dropdown-item" href="#" onclick="confirmLogout()">Cerrar sesión</a></li>
 </ul>
 </div>
 </div>
@@ -133,109 +157,96 @@ Historial
 
 <div class="container mt-5" style="background-image: url('{% static 'images/logoblanco.png' %}'); background-repeat: no-repeat; background-size: cover;">
 
-<center>
-    
+  <center>
     <ul></ul>
-
 
     <div class="row">
       <div class="col-lg-10 mx-auto">
-        <div class="card">
+        <div class="card" style="max-height: 300px;">
           <div class="card-header bg-dark text-white">
-            <h3>Filtro de busqueda</h3>
+            <h3>Filtro de búsqueda</h3>
           </div>
           <div class="card-body">
             <table class="table-hover table-sm">
               {% block buscador %}
-
                 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="POST">
                   {% csrf_token %}
                   <div class="input-group">
                     <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." style="text-align: center;" name="buscar" value="{{request.POST.buscar}}">
-                    
                   </div>
-                  <div class="row">
-                      <div class="col"><button class="btn p-1 btn-warning w-10 mt-5" type="submit"><text class="fs-5" >Buscar <i class="bi bi-search"></i></div>
+                  <div class="card-footer">
+                    <div class="row justify-content-center">
+                      <div class="col">
+                        <button class="btn p-1 btn-warning w-10 mt-5" type="submit">
+                          <text class="fs-5">Buscar <i class="bi bi-search"></i></text>
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </form> 
-
+                </form>
               {% endblock buscador %}
-
-            
             </table>
-            
           </div>
         </div>
       </div>
     </div>
-
-    <ul></ul>
-    
-
+<p></p>
     <div class="row">
       <div class="col-lg-10 mx-auto">
         <div class="card">
           <div class="card-header bg-dark text-white">
             <h3>Productos en disponibilidad</h3>
           </div>
-          <div class="card-body">
+          <div class="card-body" style="overflow-y: auto; max-height: 300px;">
             {% if productos %}
-            <div class="table-responsive" style="height: 100x; overflow-y: scroll;">
-              <table class="table table-hover table-bordered">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>Codigo producto</th>
-                    <th>Categoria</th>
-                    <th>Dimension</th>
-                    <th>Descripcion</th>
-                    <th>Precio</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for producto in productos %}
-                  <tr>
-                    <td>{{producto.idproducto}}</td>
-                    <td>{{producto.categoria}}</td>
-                    <td>{{producto.dimensionado}}</td>
-                    <td>{{producto.descripcion}}</td>
-                    <td>{{producto.precio}}</td>
-                    <td>
-                      <a href="/actualizar/producto/{{producto.idproducto}}" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i></a>
-                      <a href="/eliminarProducto/{{producto.idproducto}}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
-                    </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-                
-              </table>
-            </div>
-            {% else %}
-            <div class="alert alert-dark" role="alert">
-              <strong>No se encuentran productos en el sistema</strong>
-            </div>
-            {% endif %}
-            <div class="card-footer">
-              <div class="row justify-content-center">
-                <a href="/ingresar/producto" class="btn p-2 btn-success w-50" style="text-align: center;">
-                  <text class="fs-5">Agregar  <i class="bi bi-plus-square"></i></text>
-                </a>
+              <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Código producto</th>
+                      <th>Categoría</th>
+                      <th>Dimensión</th>
+                      <th>Descripción</th>
+                      <th>Precio</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for producto in productos %}
+                      <tr>
+                        <td>{{producto.idproducto}}</td>
+                        <td>{{producto.categoria}}</td>
+                        <td>{{producto.dimensionado}}</td>
+                        <td>{{producto.descripcion}}</td>
+                        <td>{{producto.precio}}</td>
+                        <td>
+                          <a href="/actualizar/producto/{{producto.idproducto}}" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i></a>
+                          <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('{{producto.idproducto}}')">
+                            <i class="bi bi-trash"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
               </div>
+            {% else %}
+              <div class="alert alert-dark" role="alert">
+                <strong>No se encuentran productos en el sistema</strong>
+              </div>
+            {% endif %}
+          </div>
+          <div class="card-footer" style="position: sticky; bottom: 0;">
+            <div class="row justify-content-center">
+              <a href="/ingresar/producto" class="btn p-2 btn-success w-50" style="text-align: center;">
+                <text class="fs-5">Agregar <i class="bi bi-plus-square"></i></text>
+              </a>
             </div>
-          
+          </div>
         </div>
-
-
-        </div>
-
       </div>
     </div>
-    
-    
-</center>
+  </center>
 </div>
 </body>
-
 </html>
-
-    

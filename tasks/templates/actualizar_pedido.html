@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,33 +8,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <div class="container mt-5"></div>
-        <div class="col-lg-10 mx-auto">
-            <div class="card">
-                <div class="card-header bg-dark text-white">
-                    <h1 style="text-align: center;">Actualizar pedido</h1>
-                </div>
-                <div class="card-body">
-                    <form action="{% url 'actualizar_pedido' ped.idpedido %}" method="POST">
-                        <table style="text-align: center;" class="table table-hover">
-                         {% csrf_token %}
-                         {{form.as_table}}
-                         <p></p>
-                         <tr>
-                             <td colspan="2">
-                                 <center><button class="btn btn-success">Actualizar pedido</button></center>
-                             </td>
-                         </tr>
-                         </table>
-                 
-                     </form>
+    <body class="bg-dark" style="background-image: url('{% static 'images/logoblanco.png' %}'); background-repeat: no-repeat; background-size: cover;">
+        <div class="row">
+            <div class="container mt-5">
+                <div class="col-lg-10 mx-auto">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <h1 style="text-align: center;">Actualizar pedido</h1>
+                        </div>
+                        <div class="card-body">
+                            <form action="{% url 'actualizar_pedido' ped.idpedido %}" method="POST">
+                                <table style="text-align: center;" class="table table-hover">
+                                    {% csrf_token %}
+                                    {{form.as_table}}
+                                    <p></p>
+                                    <tr>
+                                        <td colspan="2">
+                                            <center><button class="btn btn-success">Actualizar pedido</button></center>
+                                        </td>
+                                    </tr>
+                                    </table>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </body>
    
     
             
         
-</body>
+
 </html>
+

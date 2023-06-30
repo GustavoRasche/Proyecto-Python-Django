@@ -75,9 +75,9 @@ def listadoProductos(request):
     return render(request, 'catalogo.html', {'productos': productos})
 
 def eliminarProducto(request, idproducto):
-    prod = Producto.objects.get(idproducto = idproducto)   
+    prod = Producto.objects.get(idproducto=idproducto)   
     prod.delete()
-    return redirect('/catalogo')
+    return HttpResponse("Producto eliminado correctamente")
 
 
 def actualizarProducto(request, idproducto):
@@ -184,8 +184,7 @@ def historialPedidos(request):
 def eliminarPedido(request, idpedido):
     prod = Pedido.objects.get(idpedido = idpedido)   
     prod.delete()
-    return redirect('/home')
-
+    return HttpResponse("Producto eliminado correctamente")
 
 def actualizarPedido(request, idpedido):
     ped = Pedido.objects.get(idpedido=idpedido)
@@ -332,3 +331,18 @@ class PDFExportView(View):
         # Configura la respuesta HTTP con el archivo PDF generado
         pdf_buffer.seek(0)
         return FileResponse(pdf_buffer, as_attachment=True, filename='historial_ventas.pdf')
+
+def login(request):
+    if request.method == 'POST':
+        correo = request.POST['correo']
+        contraseña = request.POST['contraseña']
+        try:
+            empleado = Empleado.objects.get(correo=correo, contraseña=contraseña)
+            # Si se encontró el usuario en la base de datos, realiza las acciones necesarias y redirecciona a la página principal.
+            return redirect('/home')
+        except Empleado.DoesNotExist:
+            # Si no se encontró el usuario, muestra un mensaje de error.
+            error = 'Correo o contraseña incorrectos'
+            return render(request, 'signup.html', {'error': error})
+    else:
+        return render(request, 'signup.html')

@@ -24,17 +24,17 @@ from tasks.views import PDFExportView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.inicio),
+    path('', views.login, name='login'),
     path('historial/', views.historialPedidos),
     path('dashboard/', views.dashboard),
     path('ingresar/producto', views.ingresarProducto),
     path('catalogo/', views.listadoProductos),
     path('ingresar/usuario', views.ingresarUsuario),
-    path('eliminarProducto/<int:idproducto>', views.eliminarProducto),
+    path('eliminarProducto/<int:idproducto>', views.eliminarProducto, name='eliminar_producto'),
     path('actualizar/producto/<int:idproducto>', views.actualizarProducto, name='actualizar_producto'),
     path('ingresar/pedido', views.ingresarPedido, name='ingresar_pedido'),
     path('home/', views.listadoPedidos),
-    path('eliminarPedido/<int:idpedido>',views.eliminarPedido),
+    path('eliminarPedido/<int:idpedido>', views.eliminarPedido, name='eliminar_pedido'),
     path('actualizar/pedido/<int:idpedido>', views.actualizarPedido, name='actualizar_pedido'),
     path('exportar-pdf/', PDFExportView.as_view(), name='exportar_pdf'),
 
