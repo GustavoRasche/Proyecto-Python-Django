@@ -171,19 +171,18 @@ Historial
                 {% csrf_token %}
                 <div class="input-group">
                   <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." style="text-align: center;" name="buscar" value="{{request.POST.buscar}}">
+                  <div class="input-group-append">
+                    <button class="btn p-1 btn-warning" type="submit"><text class="fs-5">Buscar <i class="bi bi-search"></i></text></button>
+                  </div>
                 </div>
-              </form> 
-              <div class="card-footer">
-                <div class="row justify-content-center">
-                  <div class="col" style="text-align: center;"><button class="btn p-1 btn-warning w-10 mt-5"  type="submit"><text class="fs-5" >Buscar <i class="bi bi-search"></i></text></div>
-                </div>
-              </div>
+              </form>
             {% endblock buscador %}
           </table>
         </div>
       </div>
     </div>
   </div>
+  
 
   <p></p>
   
