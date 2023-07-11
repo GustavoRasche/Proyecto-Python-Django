@@ -200,14 +200,13 @@ def actualizarPedido(request, idpedido):
     data = {'ped': ped, 'form': form}
     return render(request, 'actualizar_pedido.html', data)
  
-
-
 class PDFExportView(View):
     def get(self, request):
         historial = Pedido.objects.all()  # Obtén todos los registros de la base de datos
 
         if not historial:
             return HttpResponse("No hay registros disponibles.")
+        
         # Crea un objeto de documento PDF
         pdf_buffer = BytesIO()
         pdf = SimpleDocTemplate(pdf_buffer, pagesize=letter)
@@ -239,10 +238,11 @@ class PDFExportView(View):
         tabla_datos.append(cabeceras)
 
         for pedido in historial:
+            fecha_venta = pedido.fechaIngreso.strftime('%Y-%m-%d %H:%M') # Formatear solo la parte de la fecha
             fila = [
                 str(pedido.idpedido),
                 pedido.estadopedido,
-                str(pedido.fechaIngreso),
+                fecha_venta,
                 pedido.descripcion,
                 str(pedido.precio),
                 pedido.cliente,
@@ -308,10 +308,11 @@ class PDFExportView(View):
         tabla_datos.append(cabeceras)
 
         for pedido in historial:
+            fecha_venta = pedido.fechaIngreso.strftime('%Y-%m-%d %H:%M')  # Formatear solo la parte de la fecha
             fila = [
                 str(pedido.idpedido),
                 pedido.estadopedido,
-                str(pedido.fechaIngreso),
+                fecha_venta,
                 pedido.descripcion,
                 str(pedido.precio),
                 pedido.cliente,
@@ -331,6 +332,7 @@ class PDFExportView(View):
         # Configura la respuesta HTTP con el archivo PDF generado
         pdf_buffer.seek(0)
         return FileResponse(pdf_buffer, as_attachment=True, filename='historial_ventas.pdf')
+
 
 def login(request):
     if request.method == 'POST':
