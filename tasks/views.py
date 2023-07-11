@@ -18,6 +18,9 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
+from django.db.models import Count
+from django.db.models.functions import ExtractMonth
+
 
 
 
@@ -348,3 +351,20 @@ def login(request):
             return render(request, 'signup.html', {'error': error})
     else:
         return render(request, 'signup.html')
+
+def dashboard(request):
+    ventas_por_mes = Pedido.objects.annotate(mes=ExtractMonth('fechaIngreso')).values('mes').annotate(total=Count('idpedido')).order_by('mes')
+
+    ventas_data = [0] * 12  # Inicializar una lista con 12 elementos (un elemento para cada mes) y establecer todos los valores en cero
+
+    for venta in ventas_por_mes:
+        mes = venta['mes']
+        total = venta['total']
+        ventas_data[mes - 1] = total  # Restar 1 al mes para que coincida con el índice de la lista (los meses comienzan desde 1)
+
+    context = {
+        'ventas_por_mes': ventas_data,
+    }
+
+    return render(request, 'dashboard.html', context)
+

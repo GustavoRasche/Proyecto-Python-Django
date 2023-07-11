@@ -1,3 +1,4 @@
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -141,8 +142,10 @@ Historial
 </div>
 <div class="b-example-divider"></div>
 
+
+
 {% block content %}
-<div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh; >
+<div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
   <div class="row">
     <div class="col-lg-12">
       <div id="container"></div>
@@ -150,7 +153,16 @@ Historial
   </div>
 </div>
 
+<script src="{% static 'highcharts/highcharts.js' %}"></script>
 <script>
+  // Obtener los datos de ventas por mes
+  var ventasData = [
+    {% for count in ventas_por_mes %}
+      {{ count }},
+    {% endfor %}
+  ];
+
+  // Configurar el gráfico de Highcharts
   Highcharts.chart('container', {
     chart: {
       type: 'column'
@@ -181,13 +193,13 @@ Historial
     yAxis: {
       min: 0,
       title: {
-        text: 'Valores ($)'
+        text: 'Ventas por mes'
       }
     },
     tooltip: {
       headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
       pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-        '<td style="padding:0"><b>{point.y:.1f} $</b></td></tr>',
+        '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
       footerFormat: '</table>',
       shared: true,
       useHTML: true
@@ -202,12 +214,9 @@ Historial
       name: 'Porcentaje de Ventas',
       showInLegend: false,
       colorByPoint: true,
-      data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
-        194.1, 95.6, 54.4]
+      data: ventasData
     }]
   });
 </script>
-{% endblock %}
 
-</body>
-</html>
+{% endblock %}
