@@ -148,7 +148,7 @@ Historial
 <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
   <div class="row">
     <div class="col-lg-12">
-      <div id="container"></div>
+      <div id="container" style="width: 1000px; height: 600px;"></div>
     </div>
   </div>
 </div>
@@ -199,7 +199,7 @@ Historial
     tooltip: {
       headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
       pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-        '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+        '<td style="padding:0"><b>{point.y:f} </b></td></tr>',
       footerFormat: '</table>',
       shared: true,
       useHTML: true
@@ -211,7 +211,7 @@ Historial
       }
     },
     series: [{
-      name: 'Porcentaje de Ventas',
+      name: 'Ventas totales',
       showInLegend: false,
       colorByPoint: true,
       data: ventasData
